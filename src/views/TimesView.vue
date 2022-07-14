@@ -6,10 +6,12 @@ export default {
     return { 
       novo_time: "",
       categories: [],
+      times: [],
     };
   },
   async created(){
-    const times = await axios.get("http://localhost:4000/times");  
+    const times = await axios.get("http://localhost:4000/times");
+    this.times = times.data  ;
   },
 
   methods: {
@@ -25,7 +27,7 @@ export default {
     async excluir(time) {
       await axios.delete('http://localhost:4000/times/$ (time.id)')
       const indice = this.times.indexOf(time);
-      this.times.splice(indice, 1);
+      this.times.data(indice, 1);
     },
     alerta() {
       alert("ok");
